@@ -46,8 +46,23 @@ class CharacterTest {
 
     @Test
     public void a_character_can_only_heal_itself(){
-        int amountHealed = 100;
         Character characterTwo = new Character(500, 1, true);
+        int amountHealed = 100;
         assertEquals(500, character.heal(amountHealed, characterTwo));
+    }
+
+    @Test
+    public void if_the_target_is_5_or_more_levels_above_the_attacker_damage_is_halved(){
+        Character characterTwo = new Character(1000, 6, true);
+        int damage = 200;
+        assertEquals(900, character.dealDamage(damage, characterTwo));
+    }
+
+    @Test
+    public void if_the_target_is_5_or_more_levels_below_the_attacker_damage_is_doubled(){
+        Character character = new Character(1000, 6, true);
+        Character characterTwo = new Character(1000, 1, true);
+        int damage = 200;
+        assertEquals(600, character.dealDamage(damage, characterTwo));
     }
 }

@@ -56,25 +56,24 @@ public class Character {
         return getHealth();
     }
 
-    public int dealDamage(int damage, Character character){
-        if(this != character){
-            setHealth(getHealth() - damage);
-            if(damage >= getHealth()){
-                setAlive(false);
-                setHealth(0);
-            }
-            else{
-                setHealth(this.health);
-            }
-        }
-        return getHealth();
-    }
+//    public int dealDamage(int damage, Character character){
+//        if(this != character){
+//            setHealth(getHealth() - damage);
+//            if(damage >= getHealth()){
+//                setAlive(false);
+//                setHealth(0);
+//            }
+//            else{
+//                setHealth(this.health);
+//            }
+//        }
+//        return getHealth();
+//    }
 
     public int heal(int amountHealed, Character character){
         if (this != character){
             setHealth(character.health);
         }
-
         else {
             if(isAlive()){
                 setHealth(getHealth() + amountHealed);
@@ -86,7 +85,48 @@ public class Character {
                 setHealth(0);
             }
         }
-
         return getHealth();
     }
+
+    public int dealDamage(int damage, Character character){
+        if(this != character){
+            int attackerLevel = this.level;
+            int targetLevel = character.level;
+            int levelDiff = targetLevel - attackerLevel;
+            if (levelDiff >= 5){
+                int halfDamage = damage / 2;
+                setHealth(getHealth() - halfDamage);
+                if (halfDamage >= getHealth()) {
+                    setAlive(false);
+                    setHealth(0);
+                }
+                else {
+                    setHealth(this.health);
+                }
+            }
+            else if(levelDiff <= -5){
+                int doubleDamage = damage * 2;
+                setHealth(getHealth() - doubleDamage);
+                if (doubleDamage >= getHealth()) {
+                    setAlive(false);
+                    setHealth(0);
+                }
+                else {
+                    setHealth(this.health);
+                }
+            }
+            else {
+                setHealth(getHealth() - damage);
+                if (damage >= getHealth()) {
+                    setAlive(false);
+                    setHealth(0);
+                }
+                else {
+                    setHealth(this.health);
+                }
+            }
+        }
+        return getHealth();
+    }
+
 }
