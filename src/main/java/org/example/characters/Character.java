@@ -55,4 +55,18 @@ public class Character {
 
         return getHealth();
     }
+
+    public int dealDamage(int damage, Character character){
+        if(this!=character){
+            setHealth(getHealth() - damage);
+            if(damage >= getHealth()){
+                setAlive(false);
+                setHealth(0);
+            }
+            else{
+                setHealth(1000);
+            }
+        }
+        return getHealth();
+    }
 }

@@ -40,6 +40,7 @@ class CharacterTest {
 
     @Test
     public void characters_cannot_damage_themselves(){
-
+        int damage = 200;
+        assertEquals(1000, character.dealDamage(damage, character));
     }
 }
