@@ -43,4 +43,11 @@ class CharacterTest {
         int damage = 200;
         assertEquals(1000, character.dealDamage(damage, character));
     }
+
+    @Test
+    public void a_character_can_only_heal_itself(){
+        int amountHealed = 100;
+        Character characterTwo = new Character(500, 1, true);
+        assertEquals(500, character.heal(amountHealed, characterTwo));
+    }
 }

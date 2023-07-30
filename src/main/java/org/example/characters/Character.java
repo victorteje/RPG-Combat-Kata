@@ -57,16 +57,36 @@ public class Character {
     }
 
     public int dealDamage(int damage, Character character){
-        if(this!=character){
+        if(this != character){
             setHealth(getHealth() - damage);
             if(damage >= getHealth()){
                 setAlive(false);
                 setHealth(0);
             }
             else{
-                setHealth(1000);
+                setHealth(this.health);
             }
         }
+        return getHealth();
+    }
+
+    public int heal(int amountHealed, Character character){
+        if (this != character){
+            setHealth(character.health);
+        }
+
+        else {
+            if(isAlive()){
+                setHealth(getHealth() + amountHealed);
+                if(getHealth() > 1000){
+                    setHealth(1000);
+                }
+            }
+            else{
+                setHealth(0);
+            }
+        }
+
         return getHealth();
     }
 }
